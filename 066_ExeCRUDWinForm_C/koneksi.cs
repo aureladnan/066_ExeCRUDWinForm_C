@@ -12,7 +12,7 @@ namespace _066_ExeCRUDWinForm_C
         public SqlConnection GetConn()
         {
             SqlConnection Conn = new SqlConnection();
-            Conn.ConnectionString = "data source = Tampan; database=ProdiTI; MultipleActiveResultSets=True; User ID=sa; Password=Apasaja12";
+            Conn.ConnectionString = "data source = Tampan; database=NaotoCoffee; MultipleActiveResultSets=True; User ID=sa; Password=Apasaja12";
             return Conn;
         }
     }

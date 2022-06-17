@@ -16,18 +16,18 @@ namespace _066_ExeCRUDWinForm_C
         private SqlCommand cmd;
         private DataSet ds;
         private SqlDataAdapter da;
-        koneksi konn = new koneksi();
+        koneksi Konn = new koneksi();
+        public Form2()
+        {
+            InitializeComponent();
+        }
 
-        void tambah()
+        void reset()
         {
             textBox1.Text = "";
             textBox2.Text = "";
             textBox3.Text = "";
             textBox4.Text = "";
-        }
-        public Form2()
-        {
-            InitializeComponent();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -44,11 +44,26 @@ namespace _066_ExeCRUDWinForm_C
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SqlConnection conn = konn.GetConn();
-            cmd = new SqlCommand("insert into Pegawai values('"+ textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "')");
-            conn.Open();
-            cmd.ExecuteNonQuery();
-            MessageBox.Show("Insert Data Berhasil");
+            if(textBox1.Text.Trim() == "" || textBox2.Text.Trim() == "" || textBox3.Text.Trim() == "" || textBox4.Text.Trim() == "")
+            {
+                MessageBox.Show("Data belum terisi lengkap");
+            }
+            else
+            {
+                SqlConnection conn = Konn.GetConn();
+                try
+                {
+                    cmd = new SqlCommand("insert into Pegawai values ('" + textBox1.Text + "','" + textBox2.Text + "','" + textBox3.Text + "','" + textBox4.Text + "')", conn);
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Berhasil memasukkan Data Pegawai");
+                    reset();
+                }
+                catch (Exception X)
+                {
+                    MessageBox.Show(X.ToString());
+                }
+            }
         }
 
         private void Form2_Load(object sender, EventArgs e)
